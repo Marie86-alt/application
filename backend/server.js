@@ -8,14 +8,14 @@ const app = express();
 const port = 3000;
 
 // Clé secrète pour JWT
-const jwtSecret = 'ton_secret_jwt';
+const jwtSecret = 'secret';
 
 // Connexion à la base de données MySQL
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   password: '',
-  database: 'Ecovie',
+  database: 'ecovies',
 });
 
 db.connect((err) => {
@@ -37,6 +37,20 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
+// Route pour obtenir tous les utilisateurs
+app.get('/users', (req, res) => {
+  const sql = 'SELECT * FROM users';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs' });
+    }
+
+    res.json(results);
+  });
+});
+
 
 // Route d'inscription
 app.post(
@@ -69,6 +83,38 @@ app.post(
   }
 );
 
+// route pour obtenir tous les ecohabits
+app.post('/ecohabits', (req, res) => {
+  const { energyConsumption, waterConsumption, wasteGenerated } = req.body;
+
+  if (!energyConsumption || !waterConsumption || !wasteGenerated) {
+    return res.status(400).json({ message: 'Tous les champs sont requis' });
+  }
+
+  const sql = 'INSERT INTO ecohabits (energyConsumption, waterConsumption, wasteGenerated) VALUES (?, ?, ?)';
+  db.query(sql, [energyConsumption, waterConsumption, wasteGenerated], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Erreur lors de l\'insertion des données' });
+    }
+    res.json({ success: true, message: 'Données soumises avec succès' });
+  });
+});
+
+// route pour obtenir tous les ecohabits
+app.get('/ecohabits', (req, res) => {
+  const sql = 'SELECT * FROM ecohabits ORDER BY createdAt DESC';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Erreur lors de la récupération des données' });
+    }
+    res.json(results);
+  });
+});
+
+
+
 // Route de connexion
 app.post(
   '/login',
@@ -77,6 +123,7 @@ app.post(
     check('password', 'Le mot de passe est requis').not().isEmpty(),
   ],
   (req, res) => {
+    console.log('Requête reçue:', req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

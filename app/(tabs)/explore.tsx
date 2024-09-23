@@ -9,7 +9,7 @@ import { ThemedView } from '@/components/ThemedView';
 
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Button, TextInput, ImageBackground } from 'react-native';
-
+import EcoHabitsChart  from '@/components/EcoHabitsChart';
 const Explore = () => {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState('');
@@ -26,7 +26,13 @@ const Explore = () => {
       console.error('Erreur lors de la récupération des utilisateurs :', error);
     }
   };
-
+  const Explore = () => {
+    return (
+      <View style={styles.container}>
+        <EcoHabitsChart />
+      </View>
+    );
+  };
   const addUser = async () => {
     if (name === '' || email === '' || password === '') {
       alert('Veuillez remplir tous les champs');
@@ -146,6 +152,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     marginTop: 10,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
 });
 
