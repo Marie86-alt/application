@@ -1,20 +1,17 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image, Platform } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Button, TextInput, ImageBackground } from 'react-native';
-import EcoHabitsChart  from '@/components/EcoHabitsChart';
+
 const Explore = () => {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+
+  const router = useRouter(); // Utilisation de useRouter pour la navigation
 
   const fetchUsers = async () => {
     try {
@@ -26,13 +23,7 @@ const Explore = () => {
       console.error('Erreur lors de la récupération des utilisateurs :', error);
     }
   };
-  const Explore = () => {
-    return (
-      <View style={styles.container}>
-        <EcoHabitsChart />
-      </View>
-    );
-  };
+
   const addUser = async () => {
     if (name === '' || email === '' || password === '') {
       alert('Veuillez remplir tous les champs');
@@ -94,6 +85,20 @@ const Explore = () => {
             <Button title="Ajouter un utilisateur" onPress={addUser} />
           </View>
         </View>
+
+        {/* Bouton pour voir les habitudes écologiques */}
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Voir Habitudes Écologiques"
+            onPress={() => router.push('/ecohabits')} // Naviguer vers la page EcoHabits
+          />
+        </View>
+         {/* Ajouter un bouton pour naviguer vers la page EcoHabitsChart */}
+         <View style={styles.buttonContainer}>
+          <Button 
+          title="Voir Graphique Écologiques" 
+          onPress={() => router.push('./(tabs)/ecohabitschart')} />
+        </View>
       </View>
     </ImageBackground>
   );
@@ -152,12 +157,15 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     marginTop: 10,
+   
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#fff',
+    borderRadius: 30,
   },
 });
 
 export default Explore;
+ 

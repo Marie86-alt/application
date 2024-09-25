@@ -59,6 +59,25 @@ export default function TabLayout() {
           ),
         }}
         />
+        <Tabs.Screen
+  name="ecohabits"
+  options={{
+    title: 'Suivi Habitudes Écologiques',
+    tabBarIcon: ({ color, focused }) => (
+      <TabBarIcon name={focused ? 'leaf' : 'leaf-outline'} color={color} />
+    ),
+  }}
+/>
+<Tabs.Screen
+  name="EcoHabitsChart"
+  options={{
+    title: 'Graphiques Habitudes Écologiques',
+    tabBarIcon: ({ color, focused }) => (
+      <TabBarIcon name={focused ? 'bar-chart' : 'bar-chart-outline'} color={color} />
+    ),
+  }}
+/>
+
     </Tabs>
   );
 }

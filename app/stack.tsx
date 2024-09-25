@@ -18,6 +18,15 @@ export default function TabLayout() {
         name="profile"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="ecohabits"
+        options={{ headerShown: true }}
+        />
+         <Stack.Screen
+        name="EcoHabitsChart" // Ajoute la route pour EcoHabitsChart
+        options={{ headerShown: true, title: 'Graphique Écologiques' }}
+      />
     </Stack>
+    
   );
 }
