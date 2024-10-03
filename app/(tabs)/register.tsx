@@ -12,7 +12,7 @@ export default function RegisterScreen() {
       return;
     }
 
-    // Exemple de logique d'inscription (à remplacer par votre API)
+    // Exemple de logique d'inscription
     const userData = {
       username,
       email,

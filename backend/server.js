@@ -6,7 +6,8 @@ const { check, validationResult } = require('express-validator');
 
 const app = express();
 const port = 3000;
-
+const cors = require('cors');
+app.use(cors());
 // Clé secrète pour JWT
 const jwtSecret = 'secret';
 

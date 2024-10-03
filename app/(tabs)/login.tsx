@@ -20,12 +20,17 @@ const Login = () => {
         email,
         password,
       });
+      console.log('Réponse de connexion :', response.data);
 
       const { token } = response.data;
+      if(token) {
       await AsyncStorage.setItem('token', token);
 
       // Navigation vers le profil après connexion réussie
       router.replace('/(tabs)/explore');
+      } else {
+        Alert.alert('Erreur', 'Connexion échouée. Veuillez vérifier vos informations)');
+      }
     } catch (error) {
       console.error(error);
       Alert.alert('Erreur', 'Connexion échouée. Veuillez vérifier vos informations.');
@@ -51,6 +56,7 @@ const Login = () => {
         secureTextEntry
       />
       <Button title="Se connecter" onPress={handleLogin} />
+      <Text style={{ textAlign: 'center', marginVertical: 15 }}>ou</Text>
       <Button title="Créer un compte" onPress={() => router.push('/(tabs)/register')} />
     </View>
   );
