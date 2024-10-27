@@ -97,7 +97,7 @@ const Explore = () => {
          <View style={styles.buttonContainer}>
           <Button 
           title="Voir Graphique Écologiques" 
-          onPress={() => router.push('./(tabs)/ecohabitschart')} />
+          onPress={() => router.push('./(tabs)/ecochart')} />
         </View>
       </View>
     </ImageBackground>

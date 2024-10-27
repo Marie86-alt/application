@@ -69,7 +69,7 @@ export default function TabLayout() {
   }}
 />
 <Tabs.Screen
-  name="EcoHabitsChart"
+  name="ecochart"
   options={{
     title: 'Graphiques Habitudes Écologiques',
     tabBarIcon: ({ color, focused }) => (

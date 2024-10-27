@@ -23,8 +23,8 @@ export default function TabLayout() {
         options={{ headerShown: true }}
         />
          <Stack.Screen
-        name="EcoHabitsChart" // Ajoute la route pour EcoHabitsChart
-        options={{ headerShown: true, title: 'Graphique Écologiques' }}
+        name="ecochart" // Ajoute la route pour EcoChart
+        options={{ headerShown: true, title: 'Graphique Écologique' }}
       />
     </Stack>
     
